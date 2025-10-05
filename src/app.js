@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import userRouter from './routes/user.routes.js'
+import healthCheckRouter from './routes/healthCheck.routes.js'
 const app =express()
 app.use(cors({
     origin:process.env.CORS_ORIGIN,
@@ -13,11 +14,7 @@ app.use(express.urlencoded({
 }))
 app.use(express.static('public'))
 
-
-app.get('/', (req, res) => {
-  res.send('Hello World')
-})
-
+app.use("/api/v1/healthCheck",healthCheckRouter)
 app.use("/api/v1/users",userRouter)
 
 export default app
