@@ -20,6 +20,7 @@ const userSchema = new Schema({
         required:true,
         }
     },{timestamps:true})
+    //Pre hook save 
     userSchema.pre("save",async function (next) {
         let modifiedPassword = this.isModified("password");
         let newCheck  = this.isNew
@@ -30,4 +31,9 @@ const userSchema = new Schema({
         this.password = await bcrypt.hash(this.password,10)
         next()            
     })
+    //password comparison
+    userSchema.methods.isPasswordCorrect = async function(password){
+        console.log("THIS---->",this)
+        return await bcrypt.compare(password,this.password)
+    }
 export const User = mongoose.model("User",userSchema)    
