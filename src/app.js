@@ -6,6 +6,7 @@ import healthCheckRouter from './routes/healthCheck.routes.js'
 import loginRouter from './routes/login.routes.js'
 import logoutRouter from './routes/logout.routes.js'
 import refreshTokenRouter from './routes/refreshToken.routes.js'
+import taskRouter from './routes/task.routes.js'
 const app =express()
 app.use(cors({
     origin:process.env.CORS_ORIGIN,
@@ -24,5 +25,6 @@ app.use("/api/v1/users",userRouter)
 app.use("/api/v1/login",loginRouter)
 app.use("/api/v1/logout",logoutRouter)
 app.use("/api/v1/refreshToken",refreshTokenRouter)
+app.use("/api/v1/tasks",taskRouter)
 
 export default app

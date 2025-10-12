@@ -9,7 +9,7 @@ const userSchema = new Schema(
       required: true,
       unique: true,
       trim: true,
-      lowercase: true,
+      // lowercase: true,
       min: [6, "Must be of minimum 6 letters"],
       max: [14, "Must be of maximum 12 letters"],
       index: true,

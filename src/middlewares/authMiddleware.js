@@ -3,7 +3,7 @@ import { User } from "../model/user.model.js"
 const authValidation = async (req,res,next)=>{
     try {
             console.log(req.body,"InMiddleware REQ.BODY")
-            const token =   req.cookies 
+            const token =   req.cookies
                                 // || req.header("Authorization")?.replace("Bearer",)
             console.log("token",token)                            
             if(!token) {
