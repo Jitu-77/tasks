@@ -27,6 +27,10 @@ const taskSchema = new Schema (
             enum:["TODO", "IN_PROGRESS", "REVIEW", "DONE"],
             default:"TODO"
         },
+        supportingDocuments:{
+            type:String,
+            trim : true,
+        },
         userID:{
             type:Schema.Types.ObjectId,
             ref:"User",
