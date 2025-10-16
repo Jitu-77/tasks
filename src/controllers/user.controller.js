@@ -1,6 +1,6 @@
 import {User} from "../model/user.model.js"
 import mongoose from "mongoose"
-import awsUpload from "../utils/aws.js" 
+import {uploadSingleFile} from "../utils/aws.js" 
 const registeredUser = async(req,res)=>{
     try {
         console.log(req.body)
@@ -15,9 +15,9 @@ const registeredUser = async(req,res)=>{
         if(existingUser){
             return res.status(500).json({message : "Already you are am user!."})
         }
-        const response = await awsUpload(req.file.filename,`${req.file.destination}/${req.file.filename}`)
+        const response = await uploadSingleFile(req.file.filename,`${req.file.destination}/${req.file.filename}`)
         console.log(response,"RESPONSE")
-        const avatar = req.file.filename;
+        const avatar = response;
         const user = await User.create({
             username,
             email,

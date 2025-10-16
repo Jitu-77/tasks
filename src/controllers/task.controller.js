@@ -1,11 +1,12 @@
 import {Task} from '../model/tasks.model.js'
 import {User} from '../model/user.model.js'
-
+import { uploadMultipleFile } from '../utils/aws.js';
 export const createTask = async (req,res)=>{
     // const taskBody
     try {
     const user = req.user;
     console.log("USER",user);
+    console.log("REQ FILES",req.files);
     if(!user?._id) return res.status(500).json({message:"Not Authorized!."})
     const task = req?.body;
     if(!task) return res.status(500).json({message:"There is no task body!."})
@@ -13,9 +14,11 @@ export const createTask = async (req,res)=>{
     console.log("TASKS2",task);
     let {title,subTitle,description,
         completed,lifeCycleStatus,userID} = task
+    const supportingFiles  = await uploadMultipleFile(req.files)
+    console.log("supportingFiles",supportingFiles)
     const createTask = await Task.create({
         title,subTitle,description,
-        completed,lifeCycleStatus,userID
+        completed,lifeCycleStatus,userID,supportingFiles
     })
     if(createTask){
         console.log("createTask",createTask)
